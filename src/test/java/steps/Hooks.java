@@ -1,4 +1,4 @@
-package ru.appline.tests;
+package steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
