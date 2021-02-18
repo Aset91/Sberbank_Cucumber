@@ -38,8 +38,8 @@ public class StartPage extends  BasePage {
      * @return
      */
     public MortgagePage chooseReadyEstateSubmenu(){
-     //   action.moveToElement(readyEstate).click().build().perform();
-        readyEstate.click();
+       action.moveToElement(readyEstate).click().build().perform();
+      //  readyEstate.click();
         return app.getMortgagePage();
     }
 
