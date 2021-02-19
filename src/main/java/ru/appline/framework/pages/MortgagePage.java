@@ -100,7 +100,6 @@ public class MortgagePage extends BasePage {
                 fillInputField(terms, "30");
                 element = terms;
                 break;
-
             default:
                 Assert.fail("поле " + text + " отсутствует");
         }
@@ -116,10 +115,6 @@ public class MortgagePage extends BasePage {
      */
 
     public MortgagePage removeCheckboxes(String text) {
-//        lifeInsuranceCheckbox.click();
-//        domClickDiscount.click();
-//        eRegistration.click();
-
         scrollToElementJs(textAddService);
         WebElement element = null;
         switch (text) {
@@ -152,7 +147,6 @@ public class MortgagePage extends BasePage {
         scrollToElementJs(textTitleCalculator);
         switchWindows();
         WebElement element = null;
-
         switch (text) {
             case "Сумма кредита":
                 element = creditAmount;
