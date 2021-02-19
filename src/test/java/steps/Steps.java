@@ -40,11 +40,14 @@ public class Steps {
 
     @Когда("^Убрать лишние чекбоксы$")
     public void removeCheckbox(DataTable dataTable) {
-        dataTable.cells().forEach(
-                raw -> {
-                    pageManager.getMortgagePage().removeCheckboxes(raw.get(0), raw.get(1));
-                }
-        );
+//        dataTable.cells().forEach(
+//                raw -> {
+//                    pageManager.getMortgagePage().removeCheckboxes(raw.get(0));
+//                }
+//        );
+        pageManager.getMortgagePage().removeCheckboxes("Страхование жизни и здоровья");
+        pageManager.getMortgagePage().removeCheckboxes("Скидка 0,3% при покупке квартиры на ДомКлик");
+        pageManager.getMortgagePage().removeCheckboxes("Электронная регистрация сделки");
     }
 
     @Тогда("^Проверить рассчеты$")

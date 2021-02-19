@@ -8,29 +8,32 @@ import static java.lang.Thread.sleep;
 import static ru.appline.framework.managers.DriverManager.getDriver;
 
 public class MortgagePage extends BasePage {
-
+    @FindBy(xpath = "//div[@data-test-id='discounts']//div[text()]")
+    private WebElement textAddService;
+    @FindBy(xpath = "//h2[contains(.,'Рассчитайте ипотеку')]")
+    private WebElement textTitleCalculator;
     @FindBy(xpath = "//div[@class='dc-input__label-4-9-1' and text()='Стоимость недвижимости']/..//input")
-    public WebElement propertyPrice;
+    private WebElement propertyPrice;
     @FindBy(xpath = "//div[@class='dc-input__label-4-9-1' and text()='Первоначальный взнос']/..//input")
-    public WebElement initialPayment;
+    private WebElement initialPayment;
     @FindBy(xpath = "//div[@class='dc-input__label-4-9-1' and text()='Срок кредита']/..//input")
-    public WebElement terms;
+    private WebElement terms;
     @FindBy(xpath = "//span[@class='_1ZfZYgvLm4KBWPL41DOSO' and text()='Страхование жизни и здоровья']/../..//input")
-    public WebElement lifeInsuranceCheckbox;
+    private WebElement lifeInsuranceCheckbox;
     @FindBy(xpath = "//span[@class='_1ZfZYgvLm4KBWPL41DOSO' and text()='Молодая семья']/../..//input")
-    public WebElement youngFamilyCheckbox;
+    private WebElement youngFamilyCheckbox;
     @FindBy(xpath = "//span[@class='_1ZfZYgvLm4KBWPL41DOSO' and text()='Скидка 0,3% при покупке квартиры на ДомКлик']/../..//input")
-    public WebElement domClickDiscount;
+    private WebElement domClickDiscount;
     @FindBy(xpath = "//span[@class='_1ZfZYgvLm4KBWPL41DOSO' and text()='Электронная регистрация сделки']/../..//input")
-    public WebElement eRegistration;
+    private WebElement eRegistration;
     @FindBy(xpath = "//li[@class='_2oHcdFLGCjojtWqwTIofQG']//span[@data-e2e-id='mland-calculator/medium-result-credit-sum']//span")
-    public WebElement creditAmount;
+    private WebElement creditAmount;
     @FindBy(xpath = "//li[@class='_2oHcdFLGCjojtWqwTIofQG']//span[@data-e2e-id='mland-calculator/medium-result-monthly-payment']//span")
-    public WebElement monthlyPayment;
+    private WebElement monthlyPayment;
     @FindBy(xpath = "//li[@class='_2oHcdFLGCjojtWqwTIofQG']//span[@data-e2e-id='mland-calculator/medium-result-required-income']//span")
-    public WebElement requiredSalary;
+    private WebElement requiredSalary;
     @FindBy(xpath = "//li[@class='_2oHcdFLGCjojtWqwTIofQG']//span[@data-e2e-id='mland-calculator/medium-result-credit-rate']//span")
-    public WebElement interestRate;
+    private WebElement interestRate;
 
 
     /**
@@ -50,6 +53,10 @@ public class MortgagePage extends BasePage {
         getDriver().switchTo().frame("iFrameResizer0");
         return this;
     }
+    public MortgagePage switchMainWindows() {
+        getDriver().switchTo().parentFrame();
+        return this;
+    }
 
     public void waitUntilLoaded() {
         try {
@@ -67,7 +74,7 @@ public class MortgagePage extends BasePage {
     /**
      * Заполнить форму
      *
-     * @param text название поля
+     * @param text  название поля
      * @param value значение
      * @return MortgagePage
      */
@@ -76,31 +83,19 @@ public class MortgagePage extends BasePage {
         WebElement element = null;
         switch (text) {
             case "Стоимость недвижимости":
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                waitUntilLoaded();
                 scrollToElementJs(propertyPrice);
                 fillInputField(propertyPrice, "5 180 000");
                 element = propertyPrice;
                 break;
             case "Первоначальный взнос":
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                waitUntilLoaded();
                 scrollToElementJs(initialPayment);
                 fillInputField(initialPayment, "3 058 000");
                 element = initialPayment;
                 break;
             case "Срок кредита":
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                waitUntilLoaded();
                 scrollToElementJs(terms);
                 fillInputField(terms, "30");
                 element = terms;
@@ -116,56 +111,46 @@ public class MortgagePage extends BasePage {
 
     /**
      * Убрать ненужные галочки
-     * @param text название поля
-     * @param value значение
+     *
+     * @param text название кнопки
      */
 
-    public MortgagePage removeCheckboxes(String text, String value) {
+    public MortgagePage removeCheckboxes(String text) {
+//        lifeInsuranceCheckbox.click();
+//        domClickDiscount.click();
+//        eRegistration.click();
 
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        scrollToElementJs(textAddService);
         WebElement element = null;
-
         switch (text) {
-            case "Страхование жизни и здоровья" :
+            case "Страхование жизни и здоровья":
                 element = lifeInsuranceCheckbox;
-                if(lifeInsuranceCheckbox.getAttribute("ariaChecked").equals("true")) {
-                    lifeInsuranceCheckbox.click();
-                    value = "Опция не выбрана";
+                break;
+            case "Скидка 0,3% при покупке квартиры на ДомКлик":
+                element = domClickDiscount;
+                break;
+            case "Электронная регистрация сделки":
+                element = eRegistration;
+                break;
         }
-            case "Скидка 0,3% при покупке квартиры на ДомКлик" :
-                element = domClickDiscount;
-                if(domClickDiscount.getAttribute("ariaChecked").equals("true")) {
-                    domClickDiscount.click();
-                    value = "Опция не выбрана";
-                }
-            case "Электронная регистрация сделки" :
-                element = domClickDiscount;
-                if(domClickDiscount.getAttribute("ariaChecked").equals("true")) {
-                    domClickDiscount.click();
-                    value = "Опция не выбрана";
-                }
-                scrollToElementJs(lifeInsuranceCheckbox);
-    }
+        waitUntilLoaded();
+        if (element.getAttribute("ariaChecked").equals("true")) {
+            element.click();
+        }
         return this;
     }
 
     /**
      * Проверка расчетных данных
-     * @param text название поля
+     *
+     * @param text  название поля
      * @param value значение
      */
 
     public MortgagePage checkCalculations(String text, String value) {
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        scrollToElementJs(creditAmount);
+        switchMainWindows();
+        scrollToElementJs(textTitleCalculator);
+        switchWindows();
         WebElement element = null;
 
         switch (text) {
@@ -185,12 +170,11 @@ public class MortgagePage extends BasePage {
                 element = interestRate;
                 break;
         }
-                Assert.assertEquals("Поле " + element.getText() + " было заполнено некорректно",
-                        value, element.getAttribute("textContent").replaceAll("[^{\\d,}]", ""));
+        Assert.assertEquals("Поле " + element.getText() + " было заполнено некорректно",
+                value, element.getAttribute("textContent").replaceAll("[^{\\d,}]", ""));
 
         return this;
     }
-
 
 
 }
