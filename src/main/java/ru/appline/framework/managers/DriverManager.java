@@ -18,7 +18,7 @@ public class DriverManager {
     /**
      * Переменная для хранения объекта веб-драйвера
      */
-    public static WebDriver driver;
+    private static WebDriver driver;
 
     /**
      * Переменная для хранения объекта DriverManager
@@ -68,7 +68,7 @@ public class DriverManager {
                 capabilities.setCapability("enableVNC", true);
                 capabilities.setCapability("enableVideo", false);
                 try {
-                RemoteWebDriver driver = new RemoteWebDriver(
+                    driver = new RemoteWebDriver(
                         URI.create("http://selenoid.appline.ru:4445/wd/hub").toURL(),
                         capabilities);
                 } catch (MalformedURLException e) {
