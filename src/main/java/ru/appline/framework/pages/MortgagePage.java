@@ -129,7 +129,7 @@ public class MortgagePage extends BasePage {
                 break;
         }
         waitUntilLoaded();
-        if (element.getAttribute("ariaChecked").equals("true")) {
+        if (element.isSelected()) {
             element.click();
         }
         return this;

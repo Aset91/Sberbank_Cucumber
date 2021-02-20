@@ -10,7 +10,7 @@ public class Steps {
     private PageManager pageManager = PageManager.getPageManager();
 
 
-    @Когда("^Открыть главную страницу$")
+    @Когда("Открыть главную страницу")
     public void getInitialPage() {
         pageManager.getStartPage();
         pageManager.getStartPage().closeCookiesWindow();
