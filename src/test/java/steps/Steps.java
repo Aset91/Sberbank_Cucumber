@@ -25,8 +25,8 @@ public class Steps {
     public void chooseReadyEstate(String value) {
         pageManager.getStartPage().selectSubMenu(value);
         pageManager.getMortgagePage().checkOpenPage();
-        pageManager.getMortgagePage().switchWindows();
         pageManager.getMortgagePage().scrollToForm();
+        pageManager.getMortgagePage().switchWindows();
     }
 
     @Когда("^Перейти к ипотечному калькулятору и заполнить форму поле/значение$")

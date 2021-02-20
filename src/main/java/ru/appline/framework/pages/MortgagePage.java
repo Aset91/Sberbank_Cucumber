@@ -67,7 +67,7 @@ public class MortgagePage extends BasePage {
     }
 
     public MortgagePage scrollToForm() {
-        scrollToElementJs(propertyPrice);
+        scrollToElementJs(textTitleCalculator);
         return this;
     }
 
@@ -83,26 +83,19 @@ public class MortgagePage extends BasePage {
         WebElement element = null;
         switch (text) {
             case "Стоимость недвижимости":
-                waitUntilLoaded();
-                scrollToElementJs(propertyPrice);
-                fillInputField(propertyPrice, "5 180 000");
                 element = propertyPrice;
                 break;
             case "Первоначальный взнос":
-                waitUntilLoaded();
-                scrollToElementJs(initialPayment);
-                fillInputField(initialPayment, "3 058 000");
                 element = initialPayment;
                 break;
             case "Срок кредита":
-                waitUntilLoaded();
-                scrollToElementJs(terms);
-                fillInputField(terms, "30");
                 element = terms;
                 break;
             default:
                 Assert.fail("поле " + text + " отсутствует");
         }
+        waitUntilLoaded();
+        fillInputField(element, value);
         Assert.assertEquals("Поле " + text + " заполнено неверно",
                 value, element.getAttribute("value"));
         return this;
