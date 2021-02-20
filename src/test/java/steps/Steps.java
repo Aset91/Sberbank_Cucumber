@@ -16,14 +16,14 @@ public class Steps {
         pageManager.getStartPage().closeCookiesWindow();
     }
 
-    @Когда("^Открыть подменю Ипотека$")
-    public void openMortgageSubmenu() {
-        pageManager.getStartPage().openMortgageWindow();
+    @Когда("^Открыть меню (.*)$")
+    public void openMortgageSubmenu(String value) {
+        pageManager.getStartPage().selectBaseMenu(value);
     }
 
-    @Когда("^Выбрать готовое жилье$")
-    public void chooseReadyEstate() {
-        pageManager.getStartPage().chooseReadyEstateSubmenu();
+    @Когда("^Выбрать подменю (.*)$")
+    public void chooseReadyEstate(String value) {
+        pageManager.getStartPage().selectSubMenu(value);
         pageManager.getMortgagePage().checkOpenPage();
         pageManager.getMortgagePage().switchWindows();
         pageManager.getMortgagePage().scrollToForm();

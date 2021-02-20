@@ -63,8 +63,8 @@ public class DriverManager {
                 break;
             case "remote":
                 DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setBrowserName("UNKNOWN");
-                capabilities.setVersion("");
+                capabilities.setBrowserName("chrome");
+                capabilities.setVersion("73.0");
                 capabilities.setCapability("enableVNC", true);
                 capabilities.setCapability("enableVideo", false);
                 try {
