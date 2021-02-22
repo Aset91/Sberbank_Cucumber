@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage('Run Tests'){
             steps{
-                sh "/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/3.6.3/bin/mvn clean test -Dcucumber.filter.tags=\"${TAG}\""
+                sh "/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/3.6.3/bin/mvn clean test -Dcucumber.filter.tags=\"${TAG}\" -Dtype.browser=${BROWSER}"
             }
         }
         stage('Allure Report Generation'){
