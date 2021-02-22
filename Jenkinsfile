@@ -1,5 +1,6 @@
 pipeline{
-    agent any
+    agent { label 'linux' }
+
     stages{
         stage('Run Tests'){
             steps{
